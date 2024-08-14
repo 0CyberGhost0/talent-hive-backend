@@ -9,7 +9,7 @@ const authRoute=require("./routes/auth.js");
 const jobRoute=require("./routes/jobRoutes.js");
 const otpRoute=require("./routes/otpRoutes.js");
 const app=express();
-const PORT=3000;
+const PORT=process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 connectDB();
