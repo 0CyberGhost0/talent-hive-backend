@@ -15,10 +15,10 @@ app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 connectDB();
 app.get("/",async(req,res)=>{
     res.status(200).json("Working");
-})
+});
 app.use("/job",jobRoute);
-app.use("/",authRoute);
-app.use("/",otpRoute);
+app.use("/auth",authRoute);
+app.use("/otp",otpRoute);
 
 app.listen(PORT,()=>{
     console.log(`Running on PORT ${PORT}`);
