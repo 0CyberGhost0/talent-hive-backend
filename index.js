@@ -5,9 +5,9 @@ const connectDB = require("./db");
 require('dotenv').config();
 var bodyParser = require('body-parser')
 
-const authRoute=require("./routes/auth");
-const jobRoute=require("./routes/jobRoutes");
-const otpRoute=require("./routes/otpRoutes");
+const authRoute=require("./routes/auth.js");
+const jobRoute=require("./routes/jobRoutes.js");
+const otpRoute=require("./routes/otpRoutes.js");
 const app=express();
 const PORT=3000;
 app.use(cors());
