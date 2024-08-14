@@ -10,10 +10,10 @@ authRouter.post("/signup",async (req,res)=>{
     try{
         const {email,password}=req.body;
         if(!email){
-            res.statusCode(400).json({error:"Email cant be empty"});
+            res.status(400).json({error:"Email cant be empty"});
         }
         if(!password){
-            res.statusCode(400).json({error:"Enter Password"});
+            res.status(400).json({error:"Enter Password"});
         }
         const existingUser=await User.findOne({email});
         if(existingUser){
