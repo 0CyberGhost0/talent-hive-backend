@@ -6,16 +6,14 @@ require('dotenv').config();
 var bodyParser = require('body-parser')
 
 const authRoute=require("./routes/auth.js");
-const jobRoute=require("./routes/jobRoutes.js");
-const otpRoute=require("./routes/otpRoutes.js");
+const jobRoute=require("./routes/jobRoutes");
+const otpRoute=require("./routes/otpRoutes");
 const app=express();
-const PORT=process.env.PORT;
+const PORT=process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 connectDB();
-app.get("/",async(req,res)=>{
-    res.status(200).json("Working");
-});
+
 app.use("/job",jobRoute);
 app.use("/",authRoute);
 app.use("/",otpRoute);
