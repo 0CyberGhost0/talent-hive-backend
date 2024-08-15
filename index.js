@@ -16,7 +16,7 @@ connectDB();
 
 app.use("/job",jobRoute);
 app.use("/",authRoute);
-app.use("/",otpRoute);
+app.use("/otp",otpRoute);
 
 app.listen(PORT,()=>{
     console.log(`Running on PORT ${PORT}`);
