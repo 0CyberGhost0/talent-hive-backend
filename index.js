@@ -15,8 +15,9 @@ app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 connectDB();
 
 app.use("/job",jobRoute);
-app.use("/",authRoute);
 app.use("/otp",otpRoute);
+
+app.use("/",authRoute);
 
 app.listen(PORT,()=>{
     console.log(`Running on PORT ${PORT}`);
