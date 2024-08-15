@@ -4,12 +4,13 @@ const otpRoutes=express.Router();
 const sendMail=require("../mailer/mailer");
 const OTP=require("../models/otpModel");
 const User = require("../models/userModel");
-const { OperationCanceledException } = require("typescript");
+
 function generateOTP(length = 5) {
     return randomize('0',length);
 }
 otpRoutes.post("/getOtp",async (req,res)=>{
     try {
+        console.log("inside get otp");
         const {email}=req.body;
         const user=await User.findOne({email:email});
         if(!user) return res.status(500).json({error:"User doesnt exist"});
