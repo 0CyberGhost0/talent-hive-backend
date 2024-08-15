@@ -53,7 +53,9 @@ otpRoutes.post("/getOtp",async (req,res)=>{
         });
         await newOtp.save();
         console.log(otp);
+        console.log("before send");
         await sendMail(email,"Welcome to Talent Hive: Your Account Has Been Successfully Created",htmlMessage);
+        console.log("after send");
         res.status(200).json({msg:"Email Sent Successfully"});
     } catch (err) {
         console.log(err);        
