@@ -16,7 +16,6 @@ connectDB();
 
 app.use("/job",jobRoute);
 app.use("/otp",otpRoute);
-
 app.use("/",authRoute);
 
 app.listen(PORT,()=>{

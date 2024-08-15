@@ -7,7 +7,23 @@ const User = require("../models/userModel");
 
 function generateOTP(length = 5) {
     return randomize('0',length);
-}
+};
+otpRoutes.post("/verifyOtp",async (req,res)=>{
+    try {
+        console.log("INSIDE VERIFY OTP");
+        const {email,otp}=req.body;
+        if(!otp) return res.status(500).json({error:"Enter OTP!"});
+        const existingOTP=await OTP.findOne({"email":email});
+        if(!existingOTP) return res.status(500).json({error:"User doesn't exist"});
+        if(existingOTP.expiresAt<Date.now()) return res.status(500).json({error:"OTP expired"});
+        if(existingOTP.otp!= otp) return res.status(500).json({error:"Invalid OTP"});
+        await OTP.deleteOne({"email":email});
+        console.log(otp);
+        res.status(200).json({msg:"Successfully Verified"});
+    } catch (err) {
+        console.log(err);        
+    }
+});
 otpRoutes.post("/getOtp",async (req,res)=>{
     try {
         console.log("inside get otp");
@@ -43,20 +59,5 @@ otpRoutes.post("/getOtp",async (req,res)=>{
         console.log(err);        
     }
 });
-otpRoutes.post("/verifyOtp",async (req,res)=>{
-    try {
-        console.log("INSIDE VERIFY OTP");
-        const {email,otp}=req.body;
-        if(!otp) return res.status(500).json({error:"Enter OTP!"});
-        const existingOTP=await OTP.findOne({"email":email});
-        if(!existingOTP) return res.status(500).json({error:"User doesn't exist"});
-        if(existingOTP.expiresAt<Date.now()) return res.status(500).json({error:"OTP expired"});
-        if(existingOTP.otp!= otp) return res.status(500).json({error:"Invalid OTP"});
-        await OTP.deleteOne({"email":email});
-        console.log(otp);
-        res.status(200).json({msg:"Successfully Verified"});
-    } catch (err) {
-        console.log(err);        
-    }
-});
+
 module.exports=otpRoutes;
