@@ -286,10 +286,19 @@ mongoose.connect("mongodb+srv://ved:admin@talenthive.lvzpxrj.mongodb.net/?retryW
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+const addRandomNum = (jobsArray) => {
+  return jobsArray.map(job => ({
+    ...job,
+    randomNum: Math.floor(Math.random() * 17) + 1,
+  }));
+};
+
+// Add randomNum to each job
+const updatedJobs = addRandomNum(jobs);
 
 const seedDB = async () => {
   await Job.deleteMany({});
-  await Job.insertMany(jobs);
+  await Job.insertMany(updatedJobs);
   console.log("Database seeded!");
   mongoose.connection.close();
 };
